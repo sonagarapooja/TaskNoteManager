@@ -36,7 +36,10 @@ class TaskController extends Controller
                 $query->where('priority', $request->input('filter.priority'));
             }
 
-            $query->whereHas('notes'); // Filter tasks with at least one note
+            // Filter tasks that have at least one note
+            if ($request->has('filter.notes') && $request->input('filter.notes') === 'R') {
+                $query->whereHas('notes');
+            }
 
             $tasks = $query->orderByRaw("CASE WHEN priority = 'High' THEN 1 ELSE 2 END")
                 ->orderBy('notes_count', 'desc')
@@ -102,7 +105,7 @@ class TaskController extends Controller
             if ($request->notes) {
                 foreach ($request->notes as $note) {
                     $attachments = [];
-                
+
                     if (isset($note['attachment'])) {
                         foreach ($note['attachment'] as $file) {
                             $path = $file->store('attachments'); // Store the file and save the path
