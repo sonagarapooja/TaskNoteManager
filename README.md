@@ -11,6 +11,7 @@ TaskNote Manager is an application designed for managing tasks and notes efficie
 - **filter[due_date]**: Filter tasks based on their due date.
 - **filter[priority]**: Filter tasks by priority (e.g., "High", "Medium", "Low").
 - **filter[notes]**: Use the value `R` to filter tasks that have at least one note attached.
+- **File Attachments:** Attachments for notes will be uploaded to the `storage/app` directory by default using Laravel's file storage system.
 
 ## System Requirements
 - **PHP Version:** 8.0 or higher
